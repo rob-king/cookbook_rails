@@ -5,6 +5,8 @@
   <%= @recipe.description %>
 </p>
 
+<%= link_to "Edit", edit_recipe_path(@recipe) %>
+
 <h2>Ingredients</h2>
 <% @recipe.ingredients.each do |ingredient| %>
   <p><%= ingredient.amount %> of <%= ingredient.name %></p>
