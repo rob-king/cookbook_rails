@@ -43,7 +43,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'pry-rails'
-  gem 'faker'
+  gem 'faker', git: 'git@github.com:stympy/faker.git'  
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
