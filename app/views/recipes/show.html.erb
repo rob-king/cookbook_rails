@@ -6,6 +6,7 @@
 </p>
 
 <%= link_to "Edit", edit_recipe_path(@recipe) %>
+<%= link_to "Delete", @recipe, method: :delete, data: {confirm: "Delete Recipe?"} %>
 
 <h2>Ingredients</h2>
 <% @recipe.ingredients.each do |ingredient| %>

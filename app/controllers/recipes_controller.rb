@@ -26,6 +26,11 @@ class RecipesController < ApplicationController
     @recipes =  Recipe.all
   end
 
+  def destroy
+    Recipe.destroy(params[:id])
+    redirect_to recipes_path
+  end
+
   private
 
   def recipe_params
