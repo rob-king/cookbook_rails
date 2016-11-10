@@ -1,17 +1,7 @@
 Rails.application.routes.draw do
-  get 'ingredients/new'
 
-  get 'ingredients/edit'
-
-  get 'ingredients/show'
-
-  get 'recipes/new'
-
-  get 'recipes/edit'
-
-  get 'recipes/show'
-
-  get 'recipes/index'
-
+  resources :recipes do
+    resources :ingredients, only: [:new, :create, :edit, :update, :show, :destroy]
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
