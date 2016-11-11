@@ -6,8 +6,13 @@ class IngredientsController < ApplicationController
 
   def create
     @recipe = Recipe.find(params[:recipe_id])
-    @ingredient = @recipe.ingredients.create(ingredient_params)
-    redirect_to recipe_ingredient_path(@recipe, @ingredient)
+    @ingredient = @recipe.ingredients.new(ingredient_params)
+    if @ingredient.save
+      redirect_to recipe_ingredient_path(@recipe, @ingredient)
+    else
+      flash[:errors] = @ingredient.errors.full_messages
+      redirect_to new_recipe_ingredient_path
+    end
   end
 
   def edit
@@ -18,8 +23,12 @@ class IngredientsController < ApplicationController
   def update
     @recipe = Recipe.find(params[:recipe_id])
     @ingredient = Ingredient.find(params[:id])
-    @ingredient.update(ingredient_params)
-    redirect_to recipe_ingredient_path(@recipe, @ingredient)
+    if @ingredient.update(ingredient_params)
+      redirect_to recipe_ingredient_path(@recipe, @ingredient)
+    else
+      flash[:errors] = @ingredient.errors.full_messages
+      redirect_to edit_recipe_ingredient_path
+    end
   end
 
   def show

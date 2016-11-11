@@ -4,8 +4,13 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.create(recipe_params)
-    redirect_to @recipe
+    @recipe = Recipe.new(recipe_params)
+    if @recipe.save
+      redirect_to @recipe
+    else
+      flash[:errors] = @recipe.errors.full_messages
+      redirect_to new_recipe_path
+    end
   end
 
   def edit
@@ -14,8 +19,12 @@ class RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find(params[:id])
-    @recipe.update(recipe_params)
-    redirect_to @recipe
+    if @recipe.update(recipe_params)
+      redirect_to @recipe
+    else
+      flash[:errors] = @recipe.errors.full_messages
+      redirect_to edit_recipe_path
+    end
   end
 
   def show
@@ -23,7 +32,7 @@ class RecipesController < ApplicationController
   end
 
   def index
-    @recipes =  Recipe.all
+    @recipes = Recipe.all
   end
 
   def destroy
