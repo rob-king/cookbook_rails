@@ -5,10 +5,12 @@
   <%= @recipe.description %>
 </p>
 
-<%= link_to "Edit", edit_recipe_path(@recipe) %>
-<%= link_to "Delete", @recipe, method: :delete, data: {confirm: "Delete Recipe?"} %>
+<%= link_to "Back", recipes_path, class:'button' %>
+<%= link_to "Edit", edit_recipe_path(@recipe), class:'button button-primary' %>
+<%= link_to "Delete", @recipe, method: :delete, data: {confirm: "Delete Recipe?"}, class:'button' %>
 
-<h2>Ingredients</h2>
+<h2>Ingredients <%= link_to "+", new_recipe_ingredient_path(@recipe)   %></h2>
 <% @recipe.ingredients.each do |ingredient| %>
-  <p><%= ingredient.amount %> of <%= ingredient.name %></p>
+<p><%= link_to "#{ingredient.amount} of #{ingredient.name}", recipe_ingredient_path(@recipe, ingredient) %>
+</p>
 <% end %>
